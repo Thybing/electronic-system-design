@@ -3,8 +3,8 @@
 # SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
 # IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
 # SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
-# Start of session at: Wed Jul  3 09:55:25 2024
-# Process ID: 4100
+# Start of session at: Wed Jul  3 16:49:52 2024
+# Process ID: 16800
 # Current directory: D:/Project/verilog/electronic_system_design/second_design/design2/design2.runs/synth_1
 # Command line: vivado.exe -log top.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source top.tcl
 # Log file: D:/Project/verilog/electronic_system_design/second_design/design2/design2.runs/synth_1/top.vds
@@ -19,6 +19,6 @@
 # Host memory       :12554 MB
 # Swap memory       :7784 MB
 # Total Virtual     :20339 MB
-# Available Virtual :8950 MB
+# Available Virtual :7496 MB
 #-----------------------------------------------------------
 source top.tcl -notrace

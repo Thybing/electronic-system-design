@@ -1,4 +1,4 @@
-/first_design/design1/**
+/first_design/design1/
 !/first_design/design1/**/
 /second_design/design2/**
 !/second_design/design2/**/
@@ -22,9 +22,9 @@
 #*.xci(www.spiritconsortium.org)
 !*.xci
 #*.dcp(checkpoint files)
-!*.dcp
-!*.vds
-!*.pb
+# !*.dcp
+# !*.vds
+# !*.pb
 #All bd comments and layout coordinates are stored within .ui
 !*.ui
 !*.ooc
@@ -51,7 +51,7 @@
 #Do NOT ignore *.xpr files
 !*.xpr
 #Include *.xml files for 2013.4 or earlier version
-!*.xml
+ !*.xml
 #########
 #Constraint files
 #########
@@ -68,7 +68,7 @@
 #########
 #Reports
 #########
-!*.rpt
+# !*.rpt
 !*.txt
 !*.vdi
 #########

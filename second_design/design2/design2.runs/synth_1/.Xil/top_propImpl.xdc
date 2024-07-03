@@ -1,4 +1,4 @@
-set_property SRC_FILE_INFO {cfile:D:/Project/verilog/electronic_system_design/second_design/design2/design2.srcs/constrs_1/new/cs_file.xdc rfile:../../../design2.srcs/constrs_1/new/cs_file.xdc id:1} [current_design]
+set_property SRC_FILE_INFO {cfile:D:/Project/verilog/electronic_system_design/second_lesson/constrs/cs_file.xdc rfile:../../../../../second_lesson/constrs/cs_file.xdc id:1} [current_design]
 set_property src_info {type:XDC file:1 line:9 export:INPUT save:INPUT read:READ} [current_design]
 set_property PACKAGE_PIN AB20 [get_ports {static_segled_pin[7]}]
 set_property src_info {type:XDC file:1 line:10 export:INPUT save:INPUT read:READ} [current_design]
