@@ -1,0 +1,756 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2024.1 (win64) Build 5076996 Wed May 22 18:37:14 MDT 2024
+| Date         : Wed Jul  3 09:57:50 2024
+| Host         : DESKTOP-BDOFUKB running 64-bit major release  (build 9200)
+| Command      : report_timing_summary -max_paths 10 -report_unconstrained -file top_timing_summary_routed.rpt -pb top_timing_summary_routed.pb -rpx top_timing_summary_routed.rpx -warn_on_violation
+| Design       : top
+| Device       : 7a75t-fgg484
+| Speed File   : -2  PRODUCTION 1.23 2018-06-13
+| Design State : Routed
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Summary Report
+
+------------------------------------------------------------------------------------------------
+| Timer Settings
+| --------------
+------------------------------------------------------------------------------------------------
+
+  Enable Multi Corner Analysis               :  Yes
+  Enable Pessimism Removal                   :  Yes
+  Pessimism Removal Resolution               :  Nearest Common Node
+  Enable Input Delay Default Clock           :  No
+  Enable Preset / Clear Arcs                 :  No
+  Disable Flight Delays                      :  No
+  Ignore I/O Paths                           :  No
+  Timing Early Launch at Borrowing Latches   :  No
+  Borrow Time for Max Delay Exceptions       :  Yes
+  Merge Timing Exceptions                    :  Yes
+  Inter-SLR Compensation                     :  Conservative
+
+  Corner  Analyze    Analyze    
+  Name    Max Paths  Min Paths  
+  ------  ---------  ---------  
+  Slow    Yes        Yes        
+  Fast    Yes        Yes        
+
+
+------------------------------------------------------------------------------------------------
+| Report Methodology
+| ------------------
+------------------------------------------------------------------------------------------------
+
+Rule       Severity          Description                  Violations  
+---------  ----------------  ---------------------------  ----------  
+TIMING-17  Critical Warning  Non-clocked sequential cell  1000        
+
+Note: This report is based on the most recent report_methodology run and may not be up-to-date. Run report_methodology on the current design for the latest report.
+
+
+
+check_timing report
+
+Table of Contents
+-----------------
+1. checking no_clock (1239)
+2. checking constant_clock (0)
+3. checking pulse_width_clock (0)
+4. checking unconstrained_internal_endpoints (3535)
+5. checking no_input_delay (5)
+6. checking no_output_delay (9)
+7. checking multiple_clock (0)
+8. checking generated_clocks (0)
+9. checking loops (0)
+10. checking partial_input_delay (0)
+11. checking partial_output_delay (0)
+12. checking latch_loops (0)
+
+1. checking no_clock (1239)
+---------------------------
+ There are 1239 register/latch pins with no clock driven by root clock pin: clk (HIGH)
+
+
+2. checking constant_clock (0)
+------------------------------
+ There are 0 register/latch pins with constant_clock.
+
+
+3. checking pulse_width_clock (0)
+---------------------------------
+ There are 0 register/latch pins which need pulse_width check
+
+
+4. checking unconstrained_internal_endpoints (3535)
+---------------------------------------------------
+ There are 3535 pins that are not constrained for maximum delay. (HIGH)
+
+ There are 0 pins that are not constrained for maximum delay due to constant clock.
+
+
+5. checking no_input_delay (5)
+------------------------------
+ There are 5 input ports with no input delay specified. (HIGH)
+
+ There are 0 input ports with no input delay but user has a false path constraint.
+
+
+6. checking no_output_delay (9)
+-------------------------------
+ There are 9 ports with no output delay specified. (HIGH)
+
+ There are 0 ports with no output delay but user has a false path constraint
+
+ There are 0 ports with no output delay but with a timing clock defined on it or propagating through it
+
+
+7. checking multiple_clock (0)
+------------------------------
+ There are 0 register/latch pins with multiple clocks.
+
+
+8. checking generated_clocks (0)
+--------------------------------
+ There are 0 generated clocks that are not connected to a clock source.
+
+
+9. checking loops (0)
+---------------------
+ There are 0 combinational loops in the design.
+
+
+10. checking partial_input_delay (0)
+------------------------------------
+ There are 0 input ports with partial input delay specified.
+
+
+11. checking partial_output_delay (0)
+-------------------------------------
+ There are 0 ports with partial output delay specified.
+
+
+12. checking latch_loops (0)
+----------------------------
+ There are 0 combinational latch loops in the design through latch input
+
+
+
+------------------------------------------------------------------------------------------------
+| Design Timing Summary
+| ---------------------
+------------------------------------------------------------------------------------------------
+
+    WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints     WPWS(ns)     TPWS(ns)  TPWS Failing Endpoints  TPWS Total Endpoints  
+    -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------     --------     --------  ----------------------  --------------------  
+        inf        0.000                      0                 3544          inf        0.000                      0                 3544           NA           NA                      NA                    NA  
+
+
+There are no user specified timing constraints.
+
+
+------------------------------------------------------------------------------------------------
+| Clock Summary
+| -------------
+------------------------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------------------------
+| Intra Clock Table
+| -----------------
+------------------------------------------------------------------------------------------------
+
+Clock             WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints     WPWS(ns)     TPWS(ns)  TPWS Failing Endpoints  TPWS Total Endpoints  
+-----             -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------     --------     --------  ----------------------  --------------------  
+
+
+------------------------------------------------------------------------------------------------
+| Inter Clock Table
+| -----------------
+------------------------------------------------------------------------------------------------
+
+From Clock    To Clock          WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints  
+----------    --------          -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------  
+
+
+------------------------------------------------------------------------------------------------
+| Other Path Groups Table
+| -----------------------
+------------------------------------------------------------------------------------------------
+
+Path Group    From Clock    To Clock          WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints  
+----------    ----------    --------          -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------  
+
+
+------------------------------------------------------------------------------------------------
+| User Ignored Path Table
+| -----------------------
+------------------------------------------------------------------------------------------------
+
+Path Group    From Clock    To Clock    
+----------    ----------    --------    
+
+
+------------------------------------------------------------------------------------------------
+| Unconstrained Path Table
+| ------------------------
+------------------------------------------------------------------------------------------------
+
+Path Group    From Clock    To Clock    
+----------    ----------    --------    
+(none)                                    
+
+
+------------------------------------------------------------------------------------------------
+| Timing Details
+| --------------
+------------------------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------------------
+Path Group:  (none)
+From Clock:  
+  To Clock:  
+
+Max Delay          3544 Endpoints
+Min Delay          3544 Endpoints
+--------------------------------------------------------------------------------------
+
+
+Max Delay Paths
+--------------------------------------------------------------------------------------
+Slack:                    inf
+  Source:                 u_instr_mem/dout_reg/CLKARDCLK
+                            (rising edge-triggered cell RAMB18E1)
+  Destination:            obj_switch/rd_reg_reg[0]/CE
+  Path Group:             (none)
+  Path Type:              Max at Slow Process Corner
+  Data Path Delay:        14.724ns  (logic 4.013ns (27.255%)  route 10.711ns (72.745%))
+  Logic Levels:           11  (CARRY4=2 LUT2=1 LUT4=2 LUT6=5 RAMB18E1=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    RAMB18_X0Y26         RAMB18E1                     0.000     0.000 r  u_instr_mem/dout_reg/CLKARDCLK
+    RAMB18_X0Y26         RAMB18E1 (Prop_ramb18e1_CLKARDCLK_DOADO[15])
+                                                      2.125     2.125 f  u_instr_mem/dout_reg/DOADO[15]
+                         net (fo=2, routed)           1.114     3.239    u_instr_mem/imem_rdata[15]
+    SLICE_X10Y60         LUT2 (Prop_lut2_I0_O)        0.105     3.344 f  u_instr_mem/ex_alu_oprand1[0]_i_19/O
+                         net (fo=163, routed)         1.037     4.381    u_instr_mem/dout_reg_45
+    SLICE_X6Y62          LUT4 (Prop_lut4_I3_O)        0.125     4.506 r  u_instr_mem/ex_alu_oprand1[0]_i_13/O
+                         net (fo=32, routed)          4.728     9.235    u_cpu/ex_alu_oprand1[30]_i_3_1
+    SLICE_X3Y78          LUT6 (Prop_lut6_I5_O)        0.264     9.499 f  u_cpu/ex_alu_oprand1[21]_i_5/O
+                         net (fo=1, routed)           0.649    10.147    u_cpu/ex_alu_oprand1[21]_i_5_n_0
+    SLICE_X3Y77          LUT6 (Prop_lut6_I0_O)        0.105    10.252 f  u_cpu/ex_alu_oprand1[21]_i_3/O
+                         net (fo=1, routed)           0.482    10.734    u_cpu/ex_alu_oprand1[21]_i_3_n_0
+    SLICE_X4Y77          LUT6 (Prop_lut6_I1_O)        0.105    10.839 r  u_cpu/ex_alu_oprand1[21]_i_2/O
+                         net (fo=3, routed)           1.286    12.125    u_cpu/dout_reg_24[1]
+    SLICE_X9Y73          LUT6 (Prop_lut6_I0_O)        0.105    12.230 r  u_cpu/slave_sel[0]_i_17/O
+                         net (fo=1, routed)           0.000    12.230    u_cpu/slave_sel[0]_i_17_n_0
+    SLICE_X9Y73          CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.457    12.687 r  u_cpu/slave_sel_reg[0]_i_9/CO[3]
+                         net (fo=1, routed)           0.000    12.687    u_cpu/slave_sel_reg[0]_i_9_n_0
+    SLICE_X9Y74          CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.260    12.947 f  u_cpu/slave_sel_reg[0]_i_4/O[3]
+                         net (fo=1, routed)           0.542    13.489    u_cpu/slave_sel_reg[0]_i_4_n_4
+    SLICE_X8Y74          LUT4 (Prop_lut4_I1_O)        0.257    13.746 f  u_cpu/slave_sel[0]_i_2/O
+                         net (fo=1, routed)           0.267    14.013    u_cpu/slave_sel[0]_i_2_n_0
+    SLICE_X8Y75          LUT6 (Prop_lut6_I1_O)        0.105    14.118 r  u_cpu/slave_sel[0]_i_1/O
+                         net (fo=5, routed)           0.606    14.724    obj_switch/E[0]
+    SLICE_X8Y69          FDCE                                         r  obj_switch/rd_reg_reg[0]/CE
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 u_instr_mem/dout_reg/CLKARDCLK
+                            (rising edge-triggered cell RAMB18E1)
+  Destination:            obj_switch/rd_reg_reg[1]/CE
+  Path Group:             (none)
+  Path Type:              Max at Slow Process Corner
+  Data Path Delay:        14.724ns  (logic 4.013ns (27.255%)  route 10.711ns (72.745%))
+  Logic Levels:           11  (CARRY4=2 LUT2=1 LUT4=2 LUT6=5 RAMB18E1=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    RAMB18_X0Y26         RAMB18E1                     0.000     0.000 r  u_instr_mem/dout_reg/CLKARDCLK
+    RAMB18_X0Y26         RAMB18E1 (Prop_ramb18e1_CLKARDCLK_DOADO[15])
+                                                      2.125     2.125 f  u_instr_mem/dout_reg/DOADO[15]
+                         net (fo=2, routed)           1.114     3.239    u_instr_mem/imem_rdata[15]
+    SLICE_X10Y60         LUT2 (Prop_lut2_I0_O)        0.105     3.344 f  u_instr_mem/ex_alu_oprand1[0]_i_19/O
+                         net (fo=163, routed)         1.037     4.381    u_instr_mem/dout_reg_45
+    SLICE_X6Y62          LUT4 (Prop_lut4_I3_O)        0.125     4.506 r  u_instr_mem/ex_alu_oprand1[0]_i_13/O
+                         net (fo=32, routed)          4.728     9.235    u_cpu/ex_alu_oprand1[30]_i_3_1
+    SLICE_X3Y78          LUT6 (Prop_lut6_I5_O)        0.264     9.499 f  u_cpu/ex_alu_oprand1[21]_i_5/O
+                         net (fo=1, routed)           0.649    10.147    u_cpu/ex_alu_oprand1[21]_i_5_n_0
+    SLICE_X3Y77          LUT6 (Prop_lut6_I0_O)        0.105    10.252 f  u_cpu/ex_alu_oprand1[21]_i_3/O
+                         net (fo=1, routed)           0.482    10.734    u_cpu/ex_alu_oprand1[21]_i_3_n_0
+    SLICE_X4Y77          LUT6 (Prop_lut6_I1_O)        0.105    10.839 r  u_cpu/ex_alu_oprand1[21]_i_2/O
+                         net (fo=3, routed)           1.286    12.125    u_cpu/dout_reg_24[1]
+    SLICE_X9Y73          LUT6 (Prop_lut6_I0_O)        0.105    12.230 r  u_cpu/slave_sel[0]_i_17/O
+                         net (fo=1, routed)           0.000    12.230    u_cpu/slave_sel[0]_i_17_n_0
+    SLICE_X9Y73          CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.457    12.687 r  u_cpu/slave_sel_reg[0]_i_9/CO[3]
+                         net (fo=1, routed)           0.000    12.687    u_cpu/slave_sel_reg[0]_i_9_n_0
+    SLICE_X9Y74          CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.260    12.947 f  u_cpu/slave_sel_reg[0]_i_4/O[3]
+                         net (fo=1, routed)           0.542    13.489    u_cpu/slave_sel_reg[0]_i_4_n_4
+    SLICE_X8Y74          LUT4 (Prop_lut4_I1_O)        0.257    13.746 f  u_cpu/slave_sel[0]_i_2/O
+                         net (fo=1, routed)           0.267    14.013    u_cpu/slave_sel[0]_i_2_n_0
+    SLICE_X8Y75          LUT6 (Prop_lut6_I1_O)        0.105    14.118 r  u_cpu/slave_sel[0]_i_1/O
+                         net (fo=5, routed)           0.606    14.724    obj_switch/E[0]
+    SLICE_X8Y69          FDCE                                         r  obj_switch/rd_reg_reg[1]/CE
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 u_instr_mem/dout_reg/CLKARDCLK
+                            (rising edge-triggered cell RAMB18E1)
+  Destination:            obj_switch/rd_reg_reg[2]/CE
+  Path Group:             (none)
+  Path Type:              Max at Slow Process Corner
+  Data Path Delay:        14.724ns  (logic 4.013ns (27.255%)  route 10.711ns (72.745%))
+  Logic Levels:           11  (CARRY4=2 LUT2=1 LUT4=2 LUT6=5 RAMB18E1=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    RAMB18_X0Y26         RAMB18E1                     0.000     0.000 r  u_instr_mem/dout_reg/CLKARDCLK
+    RAMB18_X0Y26         RAMB18E1 (Prop_ramb18e1_CLKARDCLK_DOADO[15])
+                                                      2.125     2.125 f  u_instr_mem/dout_reg/DOADO[15]
+                         net (fo=2, routed)           1.114     3.239    u_instr_mem/imem_rdata[15]
+    SLICE_X10Y60         LUT2 (Prop_lut2_I0_O)        0.105     3.344 f  u_instr_mem/ex_alu_oprand1[0]_i_19/O
+                         net (fo=163, routed)         1.037     4.381    u_instr_mem/dout_reg_45
+    SLICE_X6Y62          LUT4 (Prop_lut4_I3_O)        0.125     4.506 r  u_instr_mem/ex_alu_oprand1[0]_i_13/O
+                         net (fo=32, routed)          4.728     9.235    u_cpu/ex_alu_oprand1[30]_i_3_1
+    SLICE_X3Y78          LUT6 (Prop_lut6_I5_O)        0.264     9.499 f  u_cpu/ex_alu_oprand1[21]_i_5/O
+                         net (fo=1, routed)           0.649    10.147    u_cpu/ex_alu_oprand1[21]_i_5_n_0
+    SLICE_X3Y77          LUT6 (Prop_lut6_I0_O)        0.105    10.252 f  u_cpu/ex_alu_oprand1[21]_i_3/O
+                         net (fo=1, routed)           0.482    10.734    u_cpu/ex_alu_oprand1[21]_i_3_n_0
+    SLICE_X4Y77          LUT6 (Prop_lut6_I1_O)        0.105    10.839 r  u_cpu/ex_alu_oprand1[21]_i_2/O
+                         net (fo=3, routed)           1.286    12.125    u_cpu/dout_reg_24[1]
+    SLICE_X9Y73          LUT6 (Prop_lut6_I0_O)        0.105    12.230 r  u_cpu/slave_sel[0]_i_17/O
+                         net (fo=1, routed)           0.000    12.230    u_cpu/slave_sel[0]_i_17_n_0
+    SLICE_X9Y73          CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.457    12.687 r  u_cpu/slave_sel_reg[0]_i_9/CO[3]
+                         net (fo=1, routed)           0.000    12.687    u_cpu/slave_sel_reg[0]_i_9_n_0
+    SLICE_X9Y74          CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.260    12.947 f  u_cpu/slave_sel_reg[0]_i_4/O[3]
+                         net (fo=1, routed)           0.542    13.489    u_cpu/slave_sel_reg[0]_i_4_n_4
+    SLICE_X8Y74          LUT4 (Prop_lut4_I1_O)        0.257    13.746 f  u_cpu/slave_sel[0]_i_2/O
+                         net (fo=1, routed)           0.267    14.013    u_cpu/slave_sel[0]_i_2_n_0
+    SLICE_X8Y75          LUT6 (Prop_lut6_I1_O)        0.105    14.118 r  u_cpu/slave_sel[0]_i_1/O
+                         net (fo=5, routed)           0.606    14.724    obj_switch/E[0]
+    SLICE_X8Y69          FDCE                                         r  obj_switch/rd_reg_reg[2]/CE
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 u_instr_mem/dout_reg/CLKARDCLK
+                            (rising edge-triggered cell RAMB18E1)
+  Destination:            obj_switch/rd_reg_reg[3]/CE
+  Path Group:             (none)
+  Path Type:              Max at Slow Process Corner
+  Data Path Delay:        14.724ns  (logic 4.013ns (27.255%)  route 10.711ns (72.745%))
+  Logic Levels:           11  (CARRY4=2 LUT2=1 LUT4=2 LUT6=5 RAMB18E1=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    RAMB18_X0Y26         RAMB18E1                     0.000     0.000 r  u_instr_mem/dout_reg/CLKARDCLK
+    RAMB18_X0Y26         RAMB18E1 (Prop_ramb18e1_CLKARDCLK_DOADO[15])
+                                                      2.125     2.125 f  u_instr_mem/dout_reg/DOADO[15]
+                         net (fo=2, routed)           1.114     3.239    u_instr_mem/imem_rdata[15]
+    SLICE_X10Y60         LUT2 (Prop_lut2_I0_O)        0.105     3.344 f  u_instr_mem/ex_alu_oprand1[0]_i_19/O
+                         net (fo=163, routed)         1.037     4.381    u_instr_mem/dout_reg_45
+    SLICE_X6Y62          LUT4 (Prop_lut4_I3_O)        0.125     4.506 r  u_instr_mem/ex_alu_oprand1[0]_i_13/O
+                         net (fo=32, routed)          4.728     9.235    u_cpu/ex_alu_oprand1[30]_i_3_1
+    SLICE_X3Y78          LUT6 (Prop_lut6_I5_O)        0.264     9.499 f  u_cpu/ex_alu_oprand1[21]_i_5/O
+                         net (fo=1, routed)           0.649    10.147    u_cpu/ex_alu_oprand1[21]_i_5_n_0
+    SLICE_X3Y77          LUT6 (Prop_lut6_I0_O)        0.105    10.252 f  u_cpu/ex_alu_oprand1[21]_i_3/O
+                         net (fo=1, routed)           0.482    10.734    u_cpu/ex_alu_oprand1[21]_i_3_n_0
+    SLICE_X4Y77          LUT6 (Prop_lut6_I1_O)        0.105    10.839 r  u_cpu/ex_alu_oprand1[21]_i_2/O
+                         net (fo=3, routed)           1.286    12.125    u_cpu/dout_reg_24[1]
+    SLICE_X9Y73          LUT6 (Prop_lut6_I0_O)        0.105    12.230 r  u_cpu/slave_sel[0]_i_17/O
+                         net (fo=1, routed)           0.000    12.230    u_cpu/slave_sel[0]_i_17_n_0
+    SLICE_X9Y73          CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.457    12.687 r  u_cpu/slave_sel_reg[0]_i_9/CO[3]
+                         net (fo=1, routed)           0.000    12.687    u_cpu/slave_sel_reg[0]_i_9_n_0
+    SLICE_X9Y74          CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.260    12.947 f  u_cpu/slave_sel_reg[0]_i_4/O[3]
+                         net (fo=1, routed)           0.542    13.489    u_cpu/slave_sel_reg[0]_i_4_n_4
+    SLICE_X8Y74          LUT4 (Prop_lut4_I1_O)        0.257    13.746 f  u_cpu/slave_sel[0]_i_2/O
+                         net (fo=1, routed)           0.267    14.013    u_cpu/slave_sel[0]_i_2_n_0
+    SLICE_X8Y75          LUT6 (Prop_lut6_I1_O)        0.105    14.118 r  u_cpu/slave_sel[0]_i_1/O
+                         net (fo=5, routed)           0.606    14.724    obj_switch/E[0]
+    SLICE_X8Y69          FDCE                                         r  obj_switch/rd_reg_reg[3]/CE
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 u_instr_mem/dout_reg/CLKARDCLK
+                            (rising edge-triggered cell RAMB18E1)
+  Destination:            slave_sel_reg[0]/D
+  Path Group:             (none)
+  Path Type:              Max at Slow Process Corner
+  Data Path Delay:        14.701ns  (logic 4.013ns (27.297%)  route 10.688ns (72.703%))
+  Logic Levels:           11  (CARRY4=2 LUT2=1 LUT4=2 LUT6=5 RAMB18E1=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    RAMB18_X0Y26         RAMB18E1                     0.000     0.000 r  u_instr_mem/dout_reg/CLKARDCLK
+    RAMB18_X0Y26         RAMB18E1 (Prop_ramb18e1_CLKARDCLK_DOADO[15])
+                                                      2.125     2.125 f  u_instr_mem/dout_reg/DOADO[15]
+                         net (fo=2, routed)           1.114     3.239    u_instr_mem/imem_rdata[15]
+    SLICE_X10Y60         LUT2 (Prop_lut2_I0_O)        0.105     3.344 f  u_instr_mem/ex_alu_oprand1[0]_i_19/O
+                         net (fo=163, routed)         1.037     4.381    u_instr_mem/dout_reg_45
+    SLICE_X6Y62          LUT4 (Prop_lut4_I3_O)        0.125     4.506 r  u_instr_mem/ex_alu_oprand1[0]_i_13/O
+                         net (fo=32, routed)          4.728     9.235    u_cpu/ex_alu_oprand1[30]_i_3_1
+    SLICE_X3Y78          LUT6 (Prop_lut6_I5_O)        0.264     9.499 f  u_cpu/ex_alu_oprand1[21]_i_5/O
+                         net (fo=1, routed)           0.649    10.147    u_cpu/ex_alu_oprand1[21]_i_5_n_0
+    SLICE_X3Y77          LUT6 (Prop_lut6_I0_O)        0.105    10.252 f  u_cpu/ex_alu_oprand1[21]_i_3/O
+                         net (fo=1, routed)           0.482    10.734    u_cpu/ex_alu_oprand1[21]_i_3_n_0
+    SLICE_X4Y77          LUT6 (Prop_lut6_I1_O)        0.105    10.839 r  u_cpu/ex_alu_oprand1[21]_i_2/O
+                         net (fo=3, routed)           1.286    12.125    u_cpu/dout_reg_24[1]
+    SLICE_X9Y73          LUT6 (Prop_lut6_I0_O)        0.105    12.230 r  u_cpu/slave_sel[0]_i_17/O
+                         net (fo=1, routed)           0.000    12.230    u_cpu/slave_sel[0]_i_17_n_0
+    SLICE_X9Y73          CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.457    12.687 r  u_cpu/slave_sel_reg[0]_i_9/CO[3]
+                         net (fo=1, routed)           0.000    12.687    u_cpu/slave_sel_reg[0]_i_9_n_0
+    SLICE_X9Y74          CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.260    12.947 f  u_cpu/slave_sel_reg[0]_i_4/O[3]
+                         net (fo=1, routed)           0.542    13.489    u_cpu/slave_sel_reg[0]_i_4_n_4
+    SLICE_X8Y74          LUT4 (Prop_lut4_I1_O)        0.257    13.746 f  u_cpu/slave_sel[0]_i_2/O
+                         net (fo=1, routed)           0.267    14.013    u_cpu/slave_sel[0]_i_2_n_0
+    SLICE_X8Y75          LUT6 (Prop_lut6_I1_O)        0.105    14.118 r  u_cpu/slave_sel[0]_i_1/O
+                         net (fo=5, routed)           0.584    14.701    switch_rd
+    SLICE_X8Y67          FDCE                                         r  slave_sel_reg[0]/D
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 u_instr_mem/dout_reg/CLKARDCLK
+                            (rising edge-triggered cell RAMB18E1)
+  Destination:            u_cpu/ex_alu_oprand1_reg[30]/D
+  Path Group:             (none)
+  Path Type:              Max at Slow Process Corner
+  Data Path Delay:        11.992ns  (logic 2.945ns (24.559%)  route 9.047ns (75.441%))
+  Logic Levels:           7  (LUT2=2 LUT4=1 LUT6=3 RAMB18E1=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    RAMB18_X0Y26         RAMB18E1                     0.000     0.000 r  u_instr_mem/dout_reg/CLKARDCLK
+    RAMB18_X0Y26         RAMB18E1 (Prop_ramb18e1_CLKARDCLK_DOADO[15])
+                                                      2.125     2.125 f  u_instr_mem/dout_reg/DOADO[15]
+                         net (fo=2, routed)           1.114     3.239    u_instr_mem/imem_rdata[15]
+    SLICE_X10Y60         LUT2 (Prop_lut2_I0_O)        0.105     3.344 f  u_instr_mem/ex_alu_oprand1[0]_i_19/O
+                         net (fo=163, routed)         1.037     4.381    u_instr_mem/dout_reg_45
+    SLICE_X6Y62          LUT4 (Prop_lut4_I3_O)        0.125     4.506 r  u_instr_mem/ex_alu_oprand1[0]_i_13/O
+                         net (fo=32, routed)          4.094     8.600    u_cpu/ex_alu_oprand1[30]_i_3_1
+    SLICE_X4Y84          LUT6 (Prop_lut6_I4_O)        0.264     8.864 f  u_cpu/ex_alu_oprand1[30]_i_5/O
+                         net (fo=1, routed)           0.843     9.706    u_cpu/ex_alu_oprand1[30]_i_5_n_0
+    SLICE_X4Y85          LUT6 (Prop_lut6_I0_O)        0.105     9.811 f  u_cpu/ex_alu_oprand1[30]_i_3/O
+                         net (fo=1, routed)           0.782    10.593    u_cpu/ex_alu_oprand1[30]_i_3_n_0
+    SLICE_X4Y82          LUT6 (Prop_lut6_I1_O)        0.105    10.698 r  u_cpu/ex_alu_oprand1[30]_i_2/O
+                         net (fo=3, routed)           1.177    11.876    u_instr_mem/ex_alu_oprand1_reg[30][2]
+    SLICE_X8Y75          LUT2 (Prop_lut2_I1_O)        0.116    11.992 r  u_instr_mem/ex_alu_oprand1[30]_i_1/O
+                         net (fo=1, routed)           0.000    11.992    u_cpu/ex_alu_oprand1_reg[30]_0[29]
+    SLICE_X8Y75          FDCE                                         r  u_cpu/ex_alu_oprand1_reg[30]/D
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 u_instr_mem/dout_reg/CLKBWRCLK
+                            (rising edge-triggered cell RAMB18E1)
+  Destination:            u_cpu/ex_alu_oprand2_reg[31]/D
+  Path Group:             (none)
+  Path Type:              Max at Slow Process Corner
+  Data Path Delay:        11.870ns  (logic 2.943ns (24.793%)  route 8.927ns (75.207%))
+  Logic Levels:           7  (LUT2=1 LUT6=5 RAMB18E1=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    RAMB18_X0Y26         RAMB18E1                     0.000     0.000 r  u_instr_mem/dout_reg/CLKBWRCLK
+    RAMB18_X0Y26         RAMB18E1 (Prop_ramb18e1_CLKBWRCLK_DOBDO[3])
+                                                      2.125     2.125 f  u_instr_mem/dout_reg/DOBDO[3]
+                         net (fo=7, routed)           1.029     3.154    u_cpu/DOBDO[2]
+    SLICE_X11Y67         LUT2 (Prop_lut2_I1_O)        0.124     3.278 r  u_cpu/ex_reg_rdata2[7]_i_8/O
+                         net (fo=115, routed)         1.934     5.213    u_cpu/if_stall_reg_rep_4
+    SLICE_X12Y56         LUT6 (Prop_lut6_I5_O)        0.274     5.487 f  u_cpu/ex_reg_rdata2[4]_i_10/O
+                         net (fo=1, routed)           0.222     5.709    u_cpu/ex_reg_rdata2[4]_i_10_n_0
+    SLICE_X12Y56         LUT6 (Prop_lut6_I1_O)        0.105     5.814 r  u_cpu/ex_reg_rdata2[4]_i_4/O
+                         net (fo=61, routed)          4.031     9.845    u_cpu/ex_insn_reg[9]_0
+    SLICE_X10Y81         LUT6 (Prop_lut6_I5_O)        0.105     9.950 f  u_cpu/ex_alu_oprand2[31]_i_7/O
+                         net (fo=2, routed)           1.129    11.079    u_cpu/ex_alu_oprand2[31]_i_7_n_0
+    SLICE_X11Y76         LUT6 (Prop_lut6_I0_O)        0.105    11.184 f  u_cpu/ex_alu_oprand2[31]_i_6/O
+                         net (fo=1, routed)           0.581    11.765    u_instr_mem/ex_alu_oprand2_reg[31]_0
+    SLICE_X10Y76         LUT6 (Prop_lut6_I5_O)        0.105    11.870 r  u_instr_mem/ex_alu_oprand2[31]_i_1/O
+                         net (fo=1, routed)           0.000    11.870    u_cpu/ex_alu_oprand2_reg[31]_1[31]
+    SLICE_X10Y76         FDCE                                         r  u_cpu/ex_alu_oprand2_reg[31]/D
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 u_instr_mem/dout_reg/CLKARDCLK
+                            (rising edge-triggered cell RAMB18E1)
+  Destination:            u_cpu/ex_alu_oprand1_reg[21]/D
+  Path Group:             (none)
+  Path Type:              Max at Slow Process Corner
+  Data Path Delay:        11.732ns  (logic 2.934ns (25.009%)  route 8.798ns (74.991%))
+  Logic Levels:           7  (LUT2=2 LUT4=1 LUT6=3 RAMB18E1=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    RAMB18_X0Y26         RAMB18E1                     0.000     0.000 r  u_instr_mem/dout_reg/CLKARDCLK
+    RAMB18_X0Y26         RAMB18E1 (Prop_ramb18e1_CLKARDCLK_DOADO[15])
+                                                      2.125     2.125 f  u_instr_mem/dout_reg/DOADO[15]
+                         net (fo=2, routed)           1.114     3.239    u_instr_mem/imem_rdata[15]
+    SLICE_X10Y60         LUT2 (Prop_lut2_I0_O)        0.105     3.344 f  u_instr_mem/ex_alu_oprand1[0]_i_19/O
+                         net (fo=163, routed)         1.037     4.381    u_instr_mem/dout_reg_45
+    SLICE_X6Y62          LUT4 (Prop_lut4_I3_O)        0.125     4.506 r  u_instr_mem/ex_alu_oprand1[0]_i_13/O
+                         net (fo=32, routed)          4.728     9.235    u_cpu/ex_alu_oprand1[30]_i_3_1
+    SLICE_X3Y78          LUT6 (Prop_lut6_I5_O)        0.264     9.499 f  u_cpu/ex_alu_oprand1[21]_i_5/O
+                         net (fo=1, routed)           0.649    10.147    u_cpu/ex_alu_oprand1[21]_i_5_n_0
+    SLICE_X3Y77          LUT6 (Prop_lut6_I0_O)        0.105    10.252 f  u_cpu/ex_alu_oprand1[21]_i_3/O
+                         net (fo=1, routed)           0.482    10.734    u_cpu/ex_alu_oprand1[21]_i_3_n_0
+    SLICE_X4Y77          LUT6 (Prop_lut6_I1_O)        0.105    10.839 r  u_cpu/ex_alu_oprand1[21]_i_2/O
+                         net (fo=3, routed)           0.788    11.627    u_instr_mem/ex_alu_oprand1_reg[23][1]
+    SLICE_X6Y75          LUT2 (Prop_lut2_I1_O)        0.105    11.732 r  u_instr_mem/ex_alu_oprand1[21]_i_1/O
+                         net (fo=1, routed)           0.000    11.732    u_cpu/ex_alu_oprand1_reg[30]_0[20]
+    SLICE_X6Y75          FDCE                                         r  u_cpu/ex_alu_oprand1_reg[21]/D
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 u_cpu/ex_alu_oprand2_reg[3]/C
+                            (rising edge-triggered cell FDCE)
+  Destination:            obj_switch/rd_reg_reg[0]/D
+  Path Group:             (none)
+  Path Type:              Max at Slow Process Corner
+  Data Path Delay:        11.630ns  (logic 1.800ns (15.477%)  route 9.830ns (84.523%))
+  Logic Levels:           10  (CARRY4=1 FDCE=1 LUT4=1 LUT5=2 LUT6=5)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    SLICE_X12Y67         FDCE                         0.000     0.000 r  u_cpu/ex_alu_oprand2_reg[3]/C
+    SLICE_X12Y67         FDCE (Prop_fdce_C_Q)         0.433     0.433 r  u_cpu/ex_alu_oprand2_reg[3]/Q
+                         net (fo=88, routed)          3.754     4.187    u_cpu/ex_alu_oprand2[3]
+    SLICE_X4Y73          LUT5 (Prop_lut5_I1_O)        0.115     4.302 r  u_cpu/regs[31][8]_i_7/O
+                         net (fo=4, routed)           0.816     5.118    u_cpu/regs[31][8]_i_7_n_0
+    SLICE_X3Y71          LUT5 (Prop_lut5_I0_O)        0.267     5.385 r  u_cpu/regs[31][1]_i_7/O
+                         net (fo=2, routed)           0.898     6.283    u_cpu/regs[31][1]_i_7_n_0
+    SLICE_X5Y69          LUT6 (Prop_lut6_I2_O)        0.105     6.388 f  u_cpu/regs[31][2]_i_5/O
+                         net (fo=1, routed)           0.467     6.855    u_cpu/regs[31][2]_i_5_n_0
+    SLICE_X6Y69          LUT6 (Prop_lut6_I3_O)        0.105     6.960 r  u_cpu/regs[31][2]_i_2/O
+                         net (fo=2, routed)           0.910     7.870    u_cpu/regs[31][2]_i_2_n_0
+    SLICE_X6Y66          LUT6 (Prop_lut6_I0_O)        0.105     7.975 r  u_cpu/regs[31][2]_i_1/O
+                         net (fo=35, routed)          1.422     9.397    u_cpu/regs[31][2]_i_1_n_0
+    SLICE_X2Y61          LUT6 (Prop_lut6_I4_O)        0.105     9.502 r  u_cpu/ex_alu_oprand1[2]_i_2/O
+                         net (fo=3, routed)           0.881    10.383    u_instr_mem/DI[1]
+    SLICE_X9Y68          LUT6 (Prop_lut6_I0_O)        0.105    10.488 r  u_instr_mem/rd_reg[3]_i_5/O
+                         net (fo=1, routed)           0.000    10.488    u_cpu/S[1]
+    SLICE_X9Y68          CARRY4 (Prop_carry4_S[2]_O[2])
+                                                      0.207    10.695 f  u_cpu/rd_reg_reg[3]_i_2/O[2]
+                         net (fo=4, routed)           0.683    11.377    u_cpu/dmem_raddr[2]
+    SLICE_X8Y69          LUT4 (Prop_lut4_I0_O)        0.253    11.630 r  u_cpu/rd_reg[0]_i_1/O
+                         net (fo=1, routed)           0.000    11.630    obj_switch/D[0]
+    SLICE_X8Y69          FDCE                                         r  obj_switch/rd_reg_reg[0]/D
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 u_instr_mem/dout_reg/CLKARDCLK
+                            (rising edge-triggered cell RAMB18E1)
+  Destination:            u_cpu/ex_alu_oprand1_reg[17]/D
+  Path Group:             (none)
+  Path Type:              Max at Slow Process Corner
+  Data Path Delay:        11.523ns  (logic 2.934ns (25.461%)  route 8.589ns (74.539%))
+  Logic Levels:           7  (LUT2=2 LUT4=1 LUT6=3 RAMB18E1=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    RAMB18_X0Y26         RAMB18E1                     0.000     0.000 r  u_instr_mem/dout_reg/CLKARDCLK
+    RAMB18_X0Y26         RAMB18E1 (Prop_ramb18e1_CLKARDCLK_DOADO[15])
+                                                      2.125     2.125 f  u_instr_mem/dout_reg/DOADO[15]
+                         net (fo=2, routed)           1.114     3.239    u_instr_mem/imem_rdata[15]
+    SLICE_X10Y60         LUT2 (Prop_lut2_I0_O)        0.105     3.344 f  u_instr_mem/ex_alu_oprand1[0]_i_19/O
+                         net (fo=163, routed)         1.037     4.381    u_instr_mem/dout_reg_45
+    SLICE_X6Y62          LUT4 (Prop_lut4_I3_O)        0.125     4.506 r  u_instr_mem/ex_alu_oprand1[0]_i_13/O
+                         net (fo=32, routed)          3.704     8.210    u_cpu/ex_alu_oprand1[30]_i_3_1
+    SLICE_X12Y88         LUT6 (Prop_lut6_I4_O)        0.264     8.474 r  u_cpu/ex_alu_oprand1[17]_i_7/O
+                         net (fo=1, routed)           1.095     9.569    u_cpu/ex_alu_oprand1[17]_i_7_n_0
+    SLICE_X8Y78          LUT6 (Prop_lut6_I5_O)        0.105     9.674 r  u_cpu/ex_alu_oprand1[17]_i_3/O
+                         net (fo=1, routed)           0.772    10.446    u_cpu/ex_alu_oprand1[17]_i_3_n_0
+    SLICE_X8Y77          LUT6 (Prop_lut6_I0_O)        0.105    10.551 r  u_cpu/ex_alu_oprand1[17]_i_2/O
+                         net (fo=3, routed)           0.868    11.418    u_instr_mem/ex_alu_oprand1_reg[19][1]
+    SLICE_X8Y72          LUT2 (Prop_lut2_I1_O)        0.105    11.523 r  u_instr_mem/ex_alu_oprand1[17]_i_1/O
+                         net (fo=1, routed)           0.000    11.523    u_cpu/ex_alu_oprand1_reg[30]_0[16]
+    SLICE_X8Y72          FDCE                                         r  u_cpu/ex_alu_oprand1_reg[17]/D
+  -------------------------------------------------------------------    -------------------
+
+
+
+
+
+Min Delay Paths
+--------------------------------------------------------------------------------------
+Slack:                    inf
+  Source:                 u_cpu/if_pc_reg[15]/C
+                            (rising edge-triggered cell FDCE)
+  Destination:            u_cpu/ex_pc_reg[15]/D
+  Path Group:             (none)
+  Path Type:              Min at Fast Process Corner
+  Data Path Delay:        0.186ns  (logic 0.128ns (68.651%)  route 0.058ns (31.349%))
+  Logic Levels:           1  (FDCE=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    SLICE_X4Y62          FDCE                         0.000     0.000 r  u_cpu/if_pc_reg[15]/C
+    SLICE_X4Y62          FDCE (Prop_fdce_C_Q)         0.128     0.128 r  u_cpu/if_pc_reg[15]/Q
+                         net (fo=1, routed)           0.058     0.186    u_cpu/if_pc[15]
+    SLICE_X4Y62          FDCE                                         r  u_cpu/ex_pc_reg[15]/D
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 u_cpu/if_pc_reg[9]/C
+                            (rising edge-triggered cell FDCE)
+  Destination:            u_cpu/ex_pc_reg[9]/D
+  Path Group:             (none)
+  Path Type:              Min at Fast Process Corner
+  Data Path Delay:        0.192ns  (logic 0.128ns (66.701%)  route 0.064ns (33.299%))
+  Logic Levels:           1  (FDCE=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    SLICE_X4Y62          FDCE                         0.000     0.000 r  u_cpu/if_pc_reg[9]/C
+    SLICE_X4Y62          FDCE (Prop_fdce_C_Q)         0.128     0.128 r  u_cpu/if_pc_reg[9]/Q
+                         net (fo=1, routed)           0.064     0.192    u_cpu/if_pc[9]
+    SLICE_X4Y62          FDCE                                         r  u_cpu/ex_pc_reg[9]/D
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 u_cpu/if_pc_reg[7]/C
+                            (rising edge-triggered cell FDCE)
+  Destination:            u_cpu/ex_pc_reg[7]/D
+  Path Group:             (none)
+  Path Type:              Min at Fast Process Corner
+  Data Path Delay:        0.252ns  (logic 0.141ns (55.856%)  route 0.111ns (44.144%))
+  Logic Levels:           1  (FDCE=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    SLICE_X1Y61          FDCE                         0.000     0.000 r  u_cpu/if_pc_reg[7]/C
+    SLICE_X1Y61          FDCE (Prop_fdce_C_Q)         0.141     0.141 r  u_cpu/if_pc_reg[7]/Q
+                         net (fo=1, routed)           0.111     0.252    u_cpu/if_pc[7]
+    SLICE_X1Y61          FDCE                                         r  u_cpu/ex_pc_reg[7]/D
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 u_cpu/if_pc_reg[8]/C
+                            (rising edge-triggered cell FDCE)
+  Destination:            u_cpu/ex_pc_reg[8]/D
+  Path Group:             (none)
+  Path Type:              Min at Fast Process Corner
+  Data Path Delay:        0.255ns  (logic 0.141ns (55.309%)  route 0.114ns (44.691%))
+  Logic Levels:           1  (FDCE=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    SLICE_X1Y61          FDCE                         0.000     0.000 r  u_cpu/if_pc_reg[8]/C
+    SLICE_X1Y61          FDCE (Prop_fdce_C_Q)         0.141     0.141 r  u_cpu/if_pc_reg[8]/Q
+                         net (fo=1, routed)           0.114     0.255    u_cpu/if_pc[8]
+    SLICE_X1Y61          FDCE                                         r  u_cpu/ex_pc_reg[8]/D
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 u_cpu/fetch_pc_reg[13]/C
+                            (rising edge-triggered cell FDCE)
+  Destination:            u_cpu/if_pc_reg[13]/D
+  Path Group:             (none)
+  Path Type:              Min at Fast Process Corner
+  Data Path Delay:        0.256ns  (logic 0.141ns (55.176%)  route 0.115ns (44.824%))
+  Logic Levels:           1  (FDCE=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    SLICE_X4Y65          FDCE                         0.000     0.000 r  u_cpu/fetch_pc_reg[13]/C
+    SLICE_X4Y65          FDCE (Prop_fdce_C_Q)         0.141     0.141 r  u_cpu/fetch_pc_reg[13]/Q
+                         net (fo=2, routed)           0.115     0.256    u_cpu/fetch_pc_reg_n_0_[13]
+    SLICE_X6Y64          FDCE                                         r  u_cpu/if_pc_reg[13]/D
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 u_cpu/if_pc_reg[2]/C
+                            (rising edge-triggered cell FDCE)
+  Destination:            u_cpu/ex_pc_reg[2]/D
+  Path Group:             (none)
+  Path Type:              Min at Fast Process Corner
+  Data Path Delay:        0.264ns  (logic 0.148ns (56.055%)  route 0.116ns (43.945%))
+  Logic Levels:           1  (FDCE=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    SLICE_X6Y62          FDCE                         0.000     0.000 r  u_cpu/if_pc_reg[2]/C
+    SLICE_X6Y62          FDCE (Prop_fdce_C_Q)         0.148     0.148 r  u_cpu/if_pc_reg[2]/Q
+                         net (fo=1, routed)           0.116     0.264    u_cpu/if_pc[2]
+    SLICE_X6Y62          FDCE                                         r  u_cpu/ex_pc_reg[2]/D
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 u_cpu/fetch_pc_reg[23]/C
+                            (rising edge-triggered cell FDCE)
+  Destination:            u_cpu/if_pc_reg[23]/D
+  Path Group:             (none)
+  Path Type:              Min at Fast Process Corner
+  Data Path Delay:        0.269ns  (logic 0.141ns (52.386%)  route 0.128ns (47.614%))
+  Logic Levels:           1  (FDCE=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    SLICE_X4Y67          FDCE                         0.000     0.000 r  u_cpu/fetch_pc_reg[23]/C
+    SLICE_X4Y67          FDCE (Prop_fdce_C_Q)         0.141     0.141 r  u_cpu/fetch_pc_reg[23]/Q
+                         net (fo=2, routed)           0.128     0.269    u_cpu/fetch_pc_reg_n_0_[23]
+    SLICE_X4Y69          FDCE                                         r  u_cpu/if_pc_reg[23]/D
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 u_cpu/fetch_pc_reg[15]/C
+                            (rising edge-triggered cell FDCE)
+  Destination:            u_cpu/if_pc_reg[15]/D
+  Path Group:             (none)
+  Path Type:              Min at Fast Process Corner
+  Data Path Delay:        0.270ns  (logic 0.141ns (52.291%)  route 0.129ns (47.709%))
+  Logic Levels:           1  (FDCE=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    SLICE_X4Y63          FDCE                         0.000     0.000 r  u_cpu/fetch_pc_reg[15]/C
+    SLICE_X4Y63          FDCE (Prop_fdce_C_Q)         0.141     0.141 r  u_cpu/fetch_pc_reg[15]/Q
+                         net (fo=2, routed)           0.129     0.270    u_cpu/fetch_pc_reg_n_0_[15]
+    SLICE_X4Y62          FDCE                                         r  u_cpu/if_pc_reg[15]/D
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 u_cpu/if_pc_reg[14]/C
+                            (rising edge-triggered cell FDCE)
+  Destination:            u_cpu/ex_pc_reg[14]/D
+  Path Group:             (none)
+  Path Type:              Min at Fast Process Corner
+  Data Path Delay:        0.273ns  (logic 0.128ns (46.905%)  route 0.145ns (53.095%))
+  Logic Levels:           1  (FDCE=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    SLICE_X7Y65          FDCE                         0.000     0.000 r  u_cpu/if_pc_reg[14]/C
+    SLICE_X7Y65          FDCE (Prop_fdce_C_Q)         0.128     0.128 r  u_cpu/if_pc_reg[14]/Q
+                         net (fo=1, routed)           0.145     0.273    u_cpu/if_pc[14]
+    SLICE_X7Y65          FDCE                                         r  u_cpu/ex_pc_reg[14]/D
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 u_cpu/fetch_pc_reg[6]/C
+                            (rising edge-triggered cell FDCE)
+  Destination:            u_cpu/if_pc_reg[6]/D
+  Path Group:             (none)
+  Path Type:              Min at Fast Process Corner
+  Data Path Delay:        0.275ns  (logic 0.141ns (51.259%)  route 0.134ns (48.741%))
+  Logic Levels:           1  (FDCE=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    SLICE_X5Y63          FDCE                         0.000     0.000 r  u_cpu/fetch_pc_reg[6]/C
+    SLICE_X5Y63          FDCE (Prop_fdce_C_Q)         0.141     0.141 r  u_cpu/fetch_pc_reg[6]/Q
+                         net (fo=4, routed)           0.134     0.275    u_cpu/fetch_pc_reg[6]_0[4]
+    SLICE_X4Y62          FDCE                                         r  u_cpu/if_pc_reg[6]/D
+  -------------------------------------------------------------------    -------------------
+
+
+
+
+

@@ -1,0 +1,15 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  \
+"../../../../../../second_lesson/rtl/buzzer.v" \
+"../../../../../../second_lesson/rtl/rom.v" \
+"../../../../../../second_lesson/rtl/seg_leds.v" \
+"../../../../../../second_lesson/rtl/switch.v" \
+"../../../../../../second_lesson/rtl/tiny_riscv1.v" \
+"../../../../../../second_lesson/rtl/top.v" \
+"../../../../design2.srcs/sim_1/new/test_tb.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort
