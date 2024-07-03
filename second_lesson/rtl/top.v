@@ -151,20 +151,20 @@ module top (
 
   // 读通道多路复用器
   reg [31:0] bus_rdata_mux; // 总线读数据多路复用信号
-  reg [2:0] slave_sel; // 从设备选择信号
+  reg [0:0] slave_sel; // 从设备选择信号
 
   always @(posedge clk or negedge rstn) 
   begin
     if (~rstn) 
-      slave_sel <= 'b000; // 复位时，清空从设备选择信号
+      slave_sel <= 'b0; // 复位时，清空从设备选择信号
     else
-      slave_sel <= {2'b0,switch_rd}; // 根据读使能信号选择从设备
+      slave_sel <= {switch_rd}; // 根据读使能信号选择从设备
   end
 
   always @*
   begin
     case (slave_sel)
-      3'b001:  bus_rdata_mux = switch_rdata; // 选择 switch 读数据
+      1'b1:  bus_rdata_mux = switch_rdata; // 选择 switch 读数据
       default: bus_rdata_mux = 'h0; // 默认情况下，读数据为 0
     endcase
   end

@@ -106,6 +106,7 @@ set ACTIVE_STEP write_bitstream
 set rc [catch {
   create_msg_db write_bitstream.pb
   set_param chipscope.maxJobs 4
+  set_param xicom.use_bs_reader 1
   set_param runs.launchOptions { -jobs 14  }
   open_checkpoint top_routed.dcp
   set_property webtalk.parent_dir D:/Project/verilog/electronic_system_design/second_design/design2/design2.cache/wt [current_project]
