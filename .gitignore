@@ -1,6 +1,6 @@
-/first_design/design1/
+first_design/design1/
 !/first_design/design1/**/
-/second_design/design2/**
+second_design/design2/**
 !/second_design/design2/**/
 /课件/
 ###########################################################################
@@ -64,12 +64,13 @@
 #########
 #Journal - files
 #########
-!*.jou
+# !*.jou
 #########
 #Reports
 #########
 # !*.rpt
 !*.txt
+second_design/design2/design2.runs/impl_1/clockInfo.txt
 # !*.vdi
 #########
 #C-files
