@@ -5,6 +5,7 @@ start:
         li   x9, 0x01               # x9 = 1 for const
         li   x10,0x1f               # x10 = 0x1f for cmp to decoder
         li   x11,0x0f               # x11 = 0x0f for cmp to decoder
+        li   x13,0x1f               # x13 = 31 for shift x12 to make x12 = x12 & 0x01
         addi x8, x0, 0x5            # x8 = 5 for buzzer cmp
 init:
         li   x1, 0x20               # x1 for display
@@ -18,6 +19,8 @@ delay:
         jal  x4, delay              # goto delay (-20)
 cnt_d:  
         lw   x12,0x04(x5)           # x12 == switch level
+        sll  x12,x12,x13            # x12 <<= 31
+        srl  x12,x12,x13            # x12 >>= 31  x12 &= 0x01
         beq  x12,x9, init           # if (x12 == 1) goto init
         beq  x1, x0, loop           # if (x1 == 0) goto loop
         addi x1, x1, -1             # x1 --
