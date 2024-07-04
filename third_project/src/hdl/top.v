@@ -16,11 +16,13 @@ module top (
   localparam    BASEADDR_DRAM     =  32'h0100_0000;
   localparam    BASEADDR_UART     =  32'h0200_0000;
   localparam    BASEADDR_SEGLED   =  32'h0300_0000;
+  localparam    BASEADDR_BUZZER   =  32'h0400_0000;
 
   localparam    ADDRWIDTH_IRAM    =   14;  // Instr MEM: 2^14 = 16KB
   localparam    ADDRWIDTH_DRAM    =   14;  // Data MEM: 2^14 = 16KB
   localparam    ADDRWIDTH_UART    =   8;   // UART MAP RANGE: 2^8 = 256Bytes
   localparam    ADDRWIDTH_SEGLED  =   8;   // Segment LEDs MAP RANGE: 2^8 = 256Bytes
+  localparam    ADDRWIDTH_BUZZER  =   8;   // BUZZER MAP RANGE: 2^8 = 256Bytes
 
   // interface of CPU instruction RAM
   wire         imem_rd;
@@ -54,6 +56,10 @@ module top (
   wire segled_wr;
   wire [ADDRWIDTH_SEGLED-1:0] segled_waddr;
   wire [31:0] segled_wdata;
+
+  wire buzzer_wr;
+  wire [ADDRWIDTH_BUZZER-1:0] buzzer_waddr;
+  wire [31:0] buzzer_wdata;
 
   ///////////////  Risc-v Processor ///////////////
   riscv #(
