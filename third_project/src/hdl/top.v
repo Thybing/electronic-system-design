@@ -7,7 +7,8 @@ module top (
     output tx_pin,
     input  rx_pin,
     
-    output [7:0] segled_pin
+    output [7:0]  segled_pin,
+    output        buzzer_pin 
 );
 
   localparam    BASEADDR_WIDTH    =  8;
@@ -57,9 +58,9 @@ module top (
   wire [ADDRWIDTH_SEGLED-1:0] segled_waddr;
   wire [31:0] segled_wdata;
 
-  wire buzzer_wr;
-  wire [ADDRWIDTH_BUZZER-1:0] buzzer_waddr;
-  wire [31:0] buzzer_wdata;
+  wire buzzer_rd,buzzer_wr;
+  wire [ADDRWIDTH_BUZZER-1:0] buzzer_raddr,buzzer_waddr;
+  wire [31:0] buzzer_rdata,buzzer_wdata;
 
   ///////////////  Risc-v Processor ///////////////
   riscv #(
@@ -161,6 +162,26 @@ module top (
       .segled_pin(segled_pin)
   );
 
+  /////////////  Buzzer //////////////
+  buzzer #(
+      .ADDRWIDTH(ADDRWIDTH_BUZZER)
+  )
+  u_buzzer(
+      .clk      (clk)     ,
+      .rst_n    (rstn)   ,
+      
+      // interface to CPU
+      .wr       (buzzer_wr)      ,
+      .waddr    (buzzer_waddr)   ,
+      .wdata    (buzzer_wdata)   ,
+      
+      .rd       (buzzer_rd)      ,
+      .raddr    (buzzer_raddr)   ,
+      .rdata    (buzzer_rdata)   , 
+
+      // pin 
+      .buzzer_pin(buzzer_pin)
+  );
 
 
   ///////////////  Data BUS interconnect  ///////////////
@@ -267,25 +288,60 @@ module top (
       .slave_wstrb(),
       .slave_wdata(segled_wdata)
   );
+  
+  // (5) Buzzer Read/Write
+  wire [31:0] buzzer_rdata_mux_in;
+
+  rbus #(
+      .BASEADDR(BASEADDR_BUZZER),
+      .BASEADDR_WIDTH(BASEADDR_WIDTH),
+      .SLAVEADDR_WIDTH(ADDRWIDTH_BUZZER) 
+  ) u_rbus_buzzer (
+      .clk(clk),
+      .dmem_rd(dmem_rd),
+      .dmem_raddr(dmem_raddr),
+      .dmem_rdata_mux_in(buzzer_rdata_mux_in),
+
+      .slave_rd(buzzer_rd),
+      .slave_raddr(buzzer_raddr),
+      .slave_rdata(buzzer_rdata)
+  );
+
+  wbus #(
+      .BASEADDR(BASEADDR_BUZZER),
+      .BASEADDR_WIDTH(BASEADDR_WIDTH),
+      .SLAVEADDR_WIDTH(ADDRWIDTH_BUZZER)
+  ) u_wbus_buzzer(
+      .dmem_wr(dmem_wr),
+      .dmem_waddr(dmem_waddr),
+      .dmem_wstrb(dmem_wstrb),
+      .dmem_wdata(dmem_wdata),
+
+      .slave_wr(buzzer_wr),
+      .slave_waddr(buzzer_waddr),
+      .slave_wstrb(),
+      .slave_wdata(buzzer_wdata)
+  );
 
   // Read Channel MUX
   reg [31:0] bus_rdata_mux;
-  reg [2:0] slave_sel;
+  reg [3:0] slave_sel;
 
   always @(posedge clk or negedge rstn) 
   begin
     if (~rstn) 
-      slave_sel <= 'b000;
+      slave_sel <= 'b0000;
     else
-      slave_sel <= {iram_rd, dram_rd, uart_rd};
+      slave_sel <= {iram_rd, dram_rd, uart_rd,buzzer_rd};
   end
 
   always @*
   begin
     case (slave_sel)
-      3'b100:  bus_rdata_mux = iram_rdata_mux_in;
-      3'b010:  bus_rdata_mux = dram_rdata_mux_in;
-      3'b001:  bus_rdata_mux = uart_rdata_mux_in;
+      4'b1000:  bus_rdata_mux = iram_rdata_mux_in;
+      4'b0100:  bus_rdata_mux = dram_rdata_mux_in;
+      4'b0010:  bus_rdata_mux = uart_rdata_mux_in;
+      4'b0001:  bus_rdata_mux = buzzer_rdata_mux_in;
       default: bus_rdata_mux = 'h0;
     endcase
   end
