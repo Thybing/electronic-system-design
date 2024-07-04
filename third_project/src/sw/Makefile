@@ -7,7 +7,7 @@ SRC_DIR = src
 BUILD_DIR = build
 VPATH = $(SRC_DIR)
 
-TARGET = ex_app
+TARGET = player
 
 C_SRCS := \
 	main.c \

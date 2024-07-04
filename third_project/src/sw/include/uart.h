@@ -8,6 +8,8 @@
 #define UART0_TXDATA    0x0c
 #define UART0_RXDATA    0x10
 
+#define TIME_OUT_FLAG   0xff
+
 #define UART0_REG(addr) (*((volatile uint32_t *)(addr+UART0_BASE)))
 
 void uart_init();

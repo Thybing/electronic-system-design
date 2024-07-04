@@ -21,12 +21,13 @@
 #define B4_PSC      50618
 #define REST        0x3f3f3f3f
 
-#define BEAT_PERIOD_PSC     6'250'000
+#define BEAT_PERIOD_PSC     6250000
 
 #define BUZZER0_REG(addr) (*((volatile uint32_t *)(addr + BUZZER0_BASE)))
 
 void buzzer_init();
-void buzzer_set_freq(uint32_t i_psc);
+bool buzzer_set_freq(char i_freq);
 void buzzer_ring_a_beat();
+bool is_buzzer_idle();
 
 #endif

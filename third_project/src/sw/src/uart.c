@@ -14,8 +14,11 @@ void uart_putc(uint8_t c)
 // Block, get one char from uart.
 uint8_t uart_getc()
 {
+    uint32_t    time_out_counter = 0;
     UART0_REG(UART0_STATUS) &= ~0x2;
-    while (!(UART0_REG(UART0_STATUS) & 0x2));
+    while (!(UART0_REG(UART0_STATUS) & 0x2)){
+        if(++time_out_counter > 0xffff) return TIME_OUT_FLAG;
+    };
     return (UART0_REG(UART0_RXDATA) & 0xff);
 }
 

@@ -34,3 +34,6 @@ set_property IOSTANDARD LVCMOS33 [get_ports {segled_pin[5]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {segled_pin[6]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {segled_pin[7]}]
 
+
+set_property IOSTANDARD LVCMOS33 [get_ports buzzer_pin]
+set_property PACKAGE_PIN P20 [get_ports buzzer_pin]
