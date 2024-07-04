@@ -1,0 +1,49 @@
+
+RISCV_GCC     := riscv-none-embed-gcc
+RISCV_AS      := riscv-none-embed-as
+RISCV_GXX     := riscv-none-embed-g++
+RISCV_OBJDUMP := riscv-none-embed-objdump
+RISCV_GDB     := riscv-none-embed-gdb
+RISCV_AR      := riscv-none-embed-ar
+RISCV_OBJCOPY := riscv-none-embed-objcopy
+RISCV_READELF := riscv-none-embed-readelf
+BIN2HEX       := bin2hex
+
+
+.PHONY: all
+all: $(TARGET)
+
+ASM_SRCS += start.S
+ASM_SRCS += trap_entry.S
+
+LINKER_SCRIPT := link.lds
+
+
+LDFLAGS += -T $(LINKER_SCRIPT) -nostartfiles -Wl,--gc-sections -Wl,--check-sections
+
+ASM_OBJS := $(ASM_SRCS:%.S=%.o)
+C_OBJS := $(C_SRCS:%.c=%.o)
+
+LINK_OBJS += $(ASM_OBJS) $(C_OBJS)
+LINK_DEPS += $(LINKER_SCRIPT)
+
+CLEAN_OBJS += $(BUILD_DIR)/$(TARGET) $(LINK_OBJS:%=$(BUILD_DIR)/%) \
+	$(BUILD_DIR)/$(TARGET).dump $(BUILD_DIR)/$(TARGET).bin $(TARGET).txt 
+
+CFLAGS += -march=$(RISCV_ARCH)
+CFLAGS += -mabi=$(RISCV_ABI)
+CFLAGS += -mcmodel=$(RISCV_MCMODEL) -ffunction-sections -fdata-sections -fno-builtin-printf -fno-builtin-malloc  -g
+
+$(TARGET): $(LINK_OBJS) $(LINK_DEPS) Makefile
+	$(RISCV_GCC) $(CFLAGS) $(INCLUDES) $(LINK_OBJS:%=$(BUILD_DIR)/%) -o $(BUILD_DIR)/$@ $(LDFLAGS)
+	$(RISCV_OBJCOPY) -O binary $(BUILD_DIR)/$@ $(BUILD_DIR)/$@.bin
+	$(RISCV_OBJDUMP) --disassemble-all $(BUILD_DIR)/$@ > $(BUILD_DIR)/$@.dump
+	$(BIN2HEX) $(BUILD_DIR)/$@.bin $@.txt
+$(ASM_OBJS): %.o: %.S
+	$(RISCV_GCC) $(CFLAGS) $(INCLUDES) -c -o $(BUILD_DIR)/$@ $<
+$(C_OBJS): %.o: %.c
+	$(RISCV_GCC) $(CFLAGS) $(INCLUDES) -c -o $(BUILD_DIR)/$@ $<
+
+.PHONY: clean
+clean:
+	rm -f $(CLEAN_OBJS)
