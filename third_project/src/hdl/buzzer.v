@@ -103,7 +103,7 @@ module buzzer #(
             else 
                 divcnt      <=  divcnt + 1  ;
             
-            if          (delay_clr[0] & (delay_cnt != 'h0)  )
+            if          (delay_clr[0]           )
                 delay_cnt   <=  'h0;
             else if     (delay_cnt >= delay_tar )    
                 delay_out   <=  'h0             ;
@@ -114,6 +114,6 @@ module buzzer #(
         end 
     end
     
-    assign  output_pin  =   status[0] & toggle_out & delay_out;
+    assign  buzzer_pin  =   status[0] & toggle_out & delay_out;
 
 endmodule
