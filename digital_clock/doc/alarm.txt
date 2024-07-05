@@ -1,0 +1,19 @@
+######################################
+闹钟模块:
+    功能:可设定时间,与时间模块进行比对,如果相同,触发寄存器置高
+
+    port:
+        clk
+        rst_n
+
+        wr
+        waddr
+        wdata
+
+        rd
+        raddr
+        rdata
+
+    reg:
+        alarm_time      触发时间
+        triggle         触发信号
