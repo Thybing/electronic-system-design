@@ -18,3 +18,4 @@ work vivado项目目录(gitignore)
 打开vivado，在下方tcl命令行内输入命令切换到scripts目录
 例如 cd {C:/xxx/xxx/xxx/scripts}
 输入命令 source ./s1_recreate_project.tcl
+（测试中，暂时无法使用，请依照项目结构手动构建。）
