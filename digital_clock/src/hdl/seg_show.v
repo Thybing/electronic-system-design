@@ -11,13 +11,17 @@ module  seg_show    #(
     input   [ADDRWIDTH-1:0] waddr       ,
     input   [31:0]          wdata       ,
 
+    input                   rd          ,
+    input   [ADDRWIDTH-1:0] raddr       ,
+    output  [31:0]          rdata       ,
+
     //output pin
     output  [3:0]           scan_cs     ,
     output  [7:0]           scan_out    ,
     output  [7:0]           static_out  
 );
 
-    parameter   ADDR_SCAN_DATA      =   'h04,
+    localparam  ADDR_SCAN_DATA      =   'h04,
                 ADDR_STATIC_DATA    =   'h08;
 
     //Write Logic
@@ -38,11 +42,29 @@ module  seg_show    #(
         end
     end
 
+    //Read Logit
+    reg [31:0]  rd_reg;
+
+    always@(posedge clk or negedge rst_n) begin
+        if(~rst_n) 
+            rd_reg  <=  'h0;
+        else begin
+            if(rd & (raddr == ADDR_SCAN_DATA))
+                rd_reg  <=  scan_data;
+            else if(rd & (raddr == ADDR_STATIC_DATA))
+                rd_reg  <=  static_data;
+            else
+                rd_reg  <=  'h0;
+        end
+    end
+
+    assign  rdata   =   rd_reg;
+
     //cs
     wire    cs_clk  ;
 
     clk_div #(
-        .cnt_width  (16)
+        .cnt_width  (16),
         .div_cnt    (25000)
     )
     u_cs_clk (
@@ -119,5 +141,5 @@ module  seg_show    #(
         end
     end
 
-    assign  scan_out    =   {cur_status[2],a_to_g};
+    assign  scan_out    =   {a_to_g,cur_status[2]};
 endmodule
