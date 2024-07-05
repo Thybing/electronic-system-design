@@ -10,7 +10,7 @@ module top (
     output [3:0]    seg_cs_pin      ,
     output [7:0]    seg_scan_pin    ,
                     seg_static_pin  ,
-    output        buzzer_pin 
+    output          buzzer_pin 
 );
 
   localparam    BASEADDR_WIDTH    =  8;
@@ -19,11 +19,13 @@ module top (
   localparam    BASEADDR_DRAM     =  32'h0100_0000;
   localparam    BASEADDR_UART     =  32'h0200_0000;
   localparam    BASEADDR_SEG      =  32'h0300_0000;
+  localparam    BASEADDR_SEC_CLK  =  32'h0400_0000;
 
   localparam    ADDRWIDTH_IRAM    =   14;  // Instr MEM: 2^14 = 16KB
   localparam    ADDRWIDTH_DRAM    =   14;  // Data MEM: 2^14 = 16KB
   localparam    ADDRWIDTH_UART    =   8;   // UART MAP RANGE: 2^8 = 256Bytes
-  localparam    ADDRWIDTH_SEG     =   4;   // Segment LEDs MAP RANGE: 2^8 = 256Bytes
+  localparam    ADDRWIDTH_SEG     =   4;   // Segment LEDs MAP RANGE: 2^4 = 16Bytes
+  localparam    ADDRWIDTH_SEC_CLK =   4;   // Sec clk MAP RANGE: 2^4 = 16Bytes
 
   // interface of CPU instruction RAM
   wire         imem_rd;
@@ -58,6 +60,11 @@ module top (
   wire [ADDRWIDTH_SEG-1:0] seg_waddr,seg_raddr;
   wire [31:0] seg_wdata,seg_rdata;
 
+  wire sec_clk_wr,sec_clk_rd;
+  wire [ADDRWIDTH_SEC_CLK-1:0] sec_clk_waddr,sec_clk_raddr;
+  wire [31:0] sec_clk_wdata,sec_clk_rdata;
+
+  
 //  wire buzzer_rd,buzzer_wr;
 //  wire [ADDRWIDTH_BUZZER-1:0] buzzer_raddr,buzzer_waddr;
 //  wire [31:0] buzzer_rdata,buzzer_wdata;
@@ -94,7 +101,7 @@ module top (
   ///////////////  Risc-v Instr MEM  ///////////////
   ram2port #(
       .ADDRESS_WIDTH(ADDRWIDTH_IRAM), 
-      .FILE("seg_show_test.txt") 
+      .FILE("sec_clock_test.txt") 
   ) u_iram (
       .clk(clk),
       .addra(instr_raddr),
@@ -166,6 +173,22 @@ module top (
       .scan_cs(seg_cs_pin),
       .scan_out(seg_scan_pin),
       .static_out(seg_static_pin)
+  );
+
+  sec_clk #(
+    .ADDRWIDTH(ADDRWIDTH_SEC_CLK)
+  )
+  u_sec_clk (
+    .clk(clk),
+    .rst_n(rstn),
+    
+    .wr(sec_clk_wr),
+    .waddr(sec_clk_waddr),
+    .wdata(sec_clk_wdata),
+
+    .rd(sec_clk_rd),
+    .raddr(sec_clk_raddr),
+    .rdata(sec_clk_rdata)
   );
 
 //   /////////////  Buzzer //////////////
@@ -311,6 +334,40 @@ module top (
       .slave_wstrb(),
       .slave_wdata(seg_wdata)
   );
+
+  // (5) sec_clk Read/Write
+  wire [31:0] sec_clk_rdata_mux_in;
+
+  rbus #(
+      .BASEADDR(BASEADDR_SEC_CLK),
+      .BASEADDR_WIDTH(BASEADDR_WIDTH),
+      .SLAVEADDR_WIDTH(ADDRWIDTH_SEC_CLK) 
+  ) u_rbus_sec_clk (
+      .clk(clk),
+      .dmem_rd(dmem_rd),
+      .dmem_raddr(dmem_raddr),
+      .dmem_rdata_mux_in(sec_clk_rdata_mux_in),
+
+      .slave_rd(sec_clk_rd),
+      .slave_raddr(sec_clk_raddr),
+      .slave_rdata(sec_clk_rdata)
+  );
+
+  wbus #(
+      .BASEADDR(BASEADDR_SEC_CLK),
+      .BASEADDR_WIDTH(BASEADDR_WIDTH),
+      .SLAVEADDR_WIDTH(ADDRWIDTH_SEC_CLK) 
+  ) u_wbus_sec_clk (
+      .dmem_wr(dmem_wr),
+      .dmem_waddr(dmem_waddr),
+      .dmem_wstrb(dmem_wstrb),
+      .dmem_wdata(dmem_wdata),
+
+      .slave_wr(sec_clk_wr),
+      .slave_waddr(sec_clk_waddr),
+      .slave_wstrb(),
+      .slave_wdata(sec_clk_wdata)
+  );
   
 //   // (5) Buzzer Read/Write
 //   wire [31:0] buzzer_rdata_mux_in;
@@ -348,23 +405,24 @@ module top (
 
   // Read Channel MUX
   reg [31:0] bus_rdata_mux;
-  reg [3:0] slave_sel;
+  reg [7:0] slave_sel;
 
   always @(posedge clk or negedge rstn) 
   begin
     if (~rstn) 
-      slave_sel <= 'b0000;
+      slave_sel <= 'b0;
     else
-      slave_sel <= {iram_rd, dram_rd, uart_rd,seg_rd};
+      slave_sel <= {iram_rd, dram_rd, uart_rd,seg_rd,sec_clk_rd,3'b0};
   end
 
   always @*
   begin
     case (slave_sel)
-      4'b1000:  bus_rdata_mux = iram_rdata_mux_in;
-      4'b0100:  bus_rdata_mux = dram_rdata_mux_in;
-      4'b0010:  bus_rdata_mux = uart_rdata_mux_in;
-      4'b0001:  bus_rdata_mux = seg_rdata_mux_in ;
+      8'b10000000:  bus_rdata_mux = iram_rdata_mux_in;
+      8'b01000000:  bus_rdata_mux = dram_rdata_mux_in;
+      8'b00100000:  bus_rdata_mux = uart_rdata_mux_in;
+      8'b00010000:  bus_rdata_mux = seg_rdata_mux_in ;
+      8'b00001000:  bus_rdata_mux = sec_clk_rdata_mux_in;
       default: bus_rdata_mux = 'h0;
     endcase
   end

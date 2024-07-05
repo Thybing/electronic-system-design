@@ -12,21 +12,25 @@ module sec_clk #(
 
     input                   rd      ,
     input   [ADDRWIDTH-1:0] raddr   ,
-    input   [31:0]          rdata   
+    output  [31:0]          rdata   
 );
     localparam  ADDR_RUN_TIME   =   'h04,
-                ADDR_CLR        =   'h08;
+                ADDR_CLR        =   'h08,
+                ADDR_INIT_TIME  =   'h0c;
 
 
     //Write Logic
-    reg     [31:0]  clr ;
+    reg     [31:0]  clr ,
+                    init_time;
     
     always @(posedge clk or negedge rst_n) begin
         if(~rst_n) 
             clr     <=  'h0 ;
         else begin
             if(wr & (waddr == ADDR_CLR) & (clr == 'h0))
-                clr <=  wdata   ;
+                clr         <=  wdata   ;
+            else if(wr & (waddr == ADDR_INIT_TIME))
+                init_time   <=  wdata   ;
             
             //clr自动复位
             if(clr != 'h0)
@@ -44,6 +48,8 @@ module sec_clk #(
         else begin
             if(rd & (raddr == ADDR_RUN_TIME))
                 rd_reg  <=  run_time;
+            else if(rd & (raddr == ADDR_INIT_TIME))
+                rd_reg  <=  init_time;
             else
                 rd_reg  <=  'h0;
         end
@@ -53,7 +59,7 @@ module sec_clk #(
 
     //second clock
     clk_div #(
-        .cnt_width  (24         )   ,
+        .cnt_width  (25         )   ,
         .div_cnt    ('h17D7840  )   
     )    
     u_clk_1s(
@@ -65,7 +71,7 @@ module sec_clk #(
     localparam   RELOAD_TIME     =   'd86400 ;
 
     always @(posedge clk_1s or posedge clr or negedge rst_n) begin
-        if(~rst_n | clr)
+        if(~rst_n | (clr == 'h1))
             run_time    <=  'h0;
         else begin
             if(run_time >= RELOAD_TIME - 1)
