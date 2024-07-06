@@ -3,11 +3,11 @@
 #include "../include/uart.h"
 #include "../include/xprintf.h"
 #include "../include/process_func.h"
+#include "../include/buzzer.h"
 
 
 int main()
 {
-
     digital_clock_init();
     while (true){
         refresh_time();

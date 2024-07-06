@@ -24,6 +24,7 @@ module top (
   localparam    BASEADDR_SEG      =  32'h0300_0000;
   localparam    BASEADDR_SEC_CLK  =  32'h0400_0000;
   localparam    BASEADDR_BUTTON   =  32'h0500_0000;
+  localparam    BASEADDR_BUZZER   =  32'h0600_0000;
 
   localparam    ADDRWIDTH_IRAM    =   14;  // Instr MEM: 2^14 = 16KB
   localparam    ADDRWIDTH_DRAM    =   14;  // Data MEM: 2^14 = 16KB
@@ -31,6 +32,7 @@ module top (
   localparam    ADDRWIDTH_SEG     =   4;   // Segment LEDs MAP RANGE: 2^4 = 16Bytes
   localparam    ADDRWIDTH_SEC_CLK =   4;   // Sec clk MAP RANGE: 2^4 = 16Bytes
   localparam    ADDRWIDTH_BUTTON  =   4;   // Button MAP RANGE: 2^4 = 16Bytes
+  localparam    ADDRWIDTH_BUZZER  =   8;   // Buzzer MAP RANGE: 2^4 = 16Bytes
 
   // interface of CPU instruction RAM
   wire         imem_rd;
@@ -74,9 +76,9 @@ module top (
   wire [31:0] button_rdata;
 
   
-//  wire buzzer_rd,buzzer_wr;
-//  wire [ADDRWIDTH_BUZZER-1:0] buzzer_raddr,buzzer_waddr;
-//  wire [31:0] buzzer_rdata,buzzer_wdata;
+ wire buzzer_rd,buzzer_wr;
+ wire [ADDRWIDTH_BUZZER-1:0] buzzer_raddr,buzzer_waddr;
+ wire [31:0] buzzer_rdata,buzzer_wdata;
 
   ///////////////  Risc-v Processor ///////////////
   riscv #(
@@ -110,7 +112,7 @@ module top (
   ///////////////  Risc-v Instr MEM  ///////////////
   ram2port #(
       .ADDRESS_WIDTH(ADDRWIDTH_IRAM), 
-      .FILE("digital_clock_test.txt") 
+      .FILE("digital_clock_final.txt") 
   ) u_iram (
       .clk(clk),
       .addra(instr_raddr),
@@ -214,29 +216,29 @@ module top (
     .button_pin(button_pin)
   );
 
-//   /////////////  Buzzer //////////////
-//   buzzer #(
-//       .ADDRWIDTH(ADDRWIDTH_BUZZER)
-//   )
-//   u_buzzer(
-//       .clk      (clk)     ,
-//       .rst_n    (rstn)   ,
+  /////////////  Buzzer //////////////
+  buzzer #(
+      .ADDRWIDTH(ADDRWIDTH_BUZZER)
+  )
+  u_buzzer(
+      .clk      (clk)     ,
+      .rst_n    (rstn)   ,
       
-//       // interface to CPU
-//       .wr       (buzzer_wr)      ,
-//       .waddr    (buzzer_waddr)   ,
-//       .wdata    (buzzer_wdata)   ,
+      // interface to CPU
+      .wr       (buzzer_wr)      ,
+      .waddr    (buzzer_waddr)   ,
+      .wdata    (buzzer_wdata)   ,
       
-//       .rd       (buzzer_rd)      ,
-//       .raddr    (buzzer_raddr)   ,
-//       .rdata    (buzzer_rdata)   , 
+      .rd       (buzzer_rd)      ,
+      .raddr    (buzzer_raddr)   ,
+      .rdata    (buzzer_rdata)   , 
 
-//       // pin 
-//       .buzzer_pin(buzzer_pin)
-//   );
+      // pin 
+      .buzzer_pin(buzzer_pin)
+  );
 
 
-  ///////////////  Data BUS interconnect  ///////////////
+  /////////////  Data BUS interconnect  ///////////////
   
   // (1) IRAM Read only
   wire [31:0] iram_rdata_mux_in;
@@ -411,39 +413,39 @@ module top (
   );
 
   
-//   // (5) Buzzer Read/Write
-//   wire [31:0] buzzer_rdata_mux_in;
+  // (7) Buzzer Read/Write
+  wire [31:0] buzzer_rdata_mux_in;
 
-//   rbus #(
-//       .BASEADDR(BASEADDR_BUZZER),
-//       .BASEADDR_WIDTH(BASEADDR_WIDTH),
-//       .SLAVEADDR_WIDTH(ADDRWIDTH_BUZZER) 
-//   ) u_rbus_buzzer (
-//       .clk(clk),
-//       .dmem_rd(dmem_rd),
-//       .dmem_raddr(dmem_raddr),
-//       .dmem_rdata_mux_in(buzzer_rdata_mux_in),
+  rbus #(
+      .BASEADDR(BASEADDR_BUZZER),
+      .BASEADDR_WIDTH(BASEADDR_WIDTH),
+      .SLAVEADDR_WIDTH(ADDRWIDTH_BUZZER) 
+  ) u_rbus_buzzer (
+      .clk(clk),
+      .dmem_rd(dmem_rd),
+      .dmem_raddr(dmem_raddr),
+      .dmem_rdata_mux_in(buzzer_rdata_mux_in),
 
-//       .slave_rd(buzzer_rd),
-//       .slave_raddr(buzzer_raddr),
-//       .slave_rdata(buzzer_rdata)
-//   );
+      .slave_rd(buzzer_rd),
+      .slave_raddr(buzzer_raddr),
+      .slave_rdata(buzzer_rdata)
+  );
 
-//   wbus #(
-//       .BASEADDR(BASEADDR_BUZZER),
-//       .BASEADDR_WIDTH(BASEADDR_WIDTH),
-//       .SLAVEADDR_WIDTH(ADDRWIDTH_BUZZER)
-//   ) u_wbus_buzzer(
-//       .dmem_wr(dmem_wr),
-//       .dmem_waddr(dmem_waddr),
-//       .dmem_wstrb(dmem_wstrb),
-//       .dmem_wdata(dmem_wdata),
+  wbus #(
+      .BASEADDR(BASEADDR_BUZZER),
+      .BASEADDR_WIDTH(BASEADDR_WIDTH),
+      .SLAVEADDR_WIDTH(ADDRWIDTH_BUZZER)
+  ) u_wbus_buzzer(
+      .dmem_wr(dmem_wr),
+      .dmem_waddr(dmem_waddr),
+      .dmem_wstrb(dmem_wstrb),
+      .dmem_wdata(dmem_wdata),
 
-//       .slave_wr(buzzer_wr),
-//       .slave_waddr(buzzer_waddr),
-//       .slave_wstrb(),
-//       .slave_wdata(buzzer_wdata)
-//   );
+      .slave_wr(buzzer_wr),
+      .slave_waddr(buzzer_waddr),
+      .slave_wstrb(),
+      .slave_wdata(buzzer_wdata)
+  );
 
   // Read Channel MUX
   reg [31:0] bus_rdata_mux;
@@ -454,7 +456,7 @@ module top (
     if (~rstn) 
       slave_sel <= 'b0;
     else
-      slave_sel <= {iram_rd, dram_rd, uart_rd,seg_rd,sec_clk_rd,button_rd,2'b0};
+      slave_sel <= {iram_rd, dram_rd, uart_rd,seg_rd,sec_clk_rd,button_rd,buzzer_rd,1'b0};
   end
 
   always @*
@@ -466,6 +468,7 @@ module top (
       8'b00010000:  bus_rdata_mux = seg_rdata_mux_in ;
       8'b00001000:  bus_rdata_mux = sec_clk_rdata_mux_in;
       8'b00000100:  bus_rdata_mux = button_rdata_mux_in;
+      8'b00000010:  bus_rdata_mux = buzzer_rdata_mux_in;
       default: bus_rdata_mux = 'h0;
     endcase
   end

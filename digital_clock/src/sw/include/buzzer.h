@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-#define BUZZER0_BASE      0x04000000
+#define BUZZER0_BASE      0x06000000
 #define BUZZER0_VER       0x00 
 #define BUZZER0_STATUS    0x04
 #define BUZZER0_DIVTAR    0x08

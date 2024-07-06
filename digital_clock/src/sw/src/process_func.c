@@ -28,6 +28,9 @@ void digital_clock_init(){
     //alarm_init
     alarm_enable = false;
     alarm_triggle = false;
+
+    //ring_init
+    ring_init();
 }
 
 void refresh_time(){
@@ -39,7 +42,11 @@ void check_alarm(){
         alarm_triggle = true;
     }
     if(alarm_triggle){
-        xprintf("\n\n########ding~ding~ding~#########\n\n");
+        enum Ring_status ring_ret = start_ring();
+        if(ring_ret == ring_end){
+            alarm_triggle = false;
+        }
+        xprintf("\n########ding~ding~ding~#########\n");
     }
 }
 

@@ -1,0 +1,1 @@
+char music_score[MUSIC_SCORE_CAPACITY] = "12345670007654321";

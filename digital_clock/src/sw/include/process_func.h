@@ -9,6 +9,7 @@
 #include "../include/seg_show.h"
 #include "../include/sec_clock.h"
 #include "../include/button.h"
+#include "../include/ring.h"
 
 enum Main_status{
     SHOW_TIME = 0,
