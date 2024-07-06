@@ -10,6 +10,9 @@ module top (
     output [3:0]    seg_cs_pin      ,
     output [7:0]    seg_scan_pin    ,
                     seg_static_pin  ,
+
+    input  [7:0]    button_pin      ,
+
     output          buzzer_pin 
 );
 
@@ -20,12 +23,14 @@ module top (
   localparam    BASEADDR_UART     =  32'h0200_0000;
   localparam    BASEADDR_SEG      =  32'h0300_0000;
   localparam    BASEADDR_SEC_CLK  =  32'h0400_0000;
+  localparam    BASEADDR_BUTTON   =  32'h0500_0000;
 
   localparam    ADDRWIDTH_IRAM    =   14;  // Instr MEM: 2^14 = 16KB
   localparam    ADDRWIDTH_DRAM    =   14;  // Data MEM: 2^14 = 16KB
   localparam    ADDRWIDTH_UART    =   8;   // UART MAP RANGE: 2^8 = 256Bytes
   localparam    ADDRWIDTH_SEG     =   4;   // Segment LEDs MAP RANGE: 2^4 = 16Bytes
   localparam    ADDRWIDTH_SEC_CLK =   4;   // Sec clk MAP RANGE: 2^4 = 16Bytes
+  localparam    ADDRWIDTH_BUTTON  =   4;   // Button MAP RANGE: 2^4 = 16Bytes
 
   // interface of CPU instruction RAM
   wire         imem_rd;
@@ -64,6 +69,10 @@ module top (
   wire [ADDRWIDTH_SEC_CLK-1:0] sec_clk_waddr,sec_clk_raddr;
   wire [31:0] sec_clk_wdata,sec_clk_rdata;
 
+  wire button_rd;
+  wire [ADDRWIDTH_BUTTON-1:0] button_raddr;
+  wire [31:0] button_rdata;
+
   
 //  wire buzzer_rd,buzzer_wr;
 //  wire [ADDRWIDTH_BUZZER-1:0] buzzer_raddr,buzzer_waddr;
@@ -101,7 +110,7 @@ module top (
   ///////////////  Risc-v Instr MEM  ///////////////
   ram2port #(
       .ADDRESS_WIDTH(ADDRWIDTH_IRAM), 
-      .FILE("sec_clock_test.txt") 
+      .FILE("button_test.txt") 
   ) u_iram (
       .clk(clk),
       .addra(instr_raddr),
@@ -189,6 +198,20 @@ module top (
     .rd(sec_clk_rd),
     .raddr(sec_clk_raddr),
     .rdata(sec_clk_rdata)
+  );
+
+  button #(
+    .ADDRWIDTH(ADDRWIDTH_BUTTON)
+  )
+  u_button (
+    .clk(clk),
+    .rst_n(rstn),
+
+    .rd(button_rd),
+    .raddr(button_raddr),
+    .rdata(button_rdata),
+
+    .button_pin(button_pin)
   );
 
 //   /////////////  Buzzer //////////////
@@ -368,6 +391,25 @@ module top (
       .slave_wstrb(),
       .slave_wdata(sec_clk_wdata)
   );
+
+  // (6) Button Read
+  wire [31:0] button_rdata_mux_in;
+
+  rbus #(
+      .BASEADDR(BASEADDR_BUTTON),
+      .BASEADDR_WIDTH(BASEADDR_WIDTH),
+      .SLAVEADDR_WIDTH(ADDRWIDTH_BUTTON) 
+  ) u_rbus_button (
+      .clk(clk),
+      .dmem_rd(dmem_rd),
+      .dmem_raddr(dmem_raddr),
+      .dmem_rdata_mux_in(button_rdata_mux_in),
+
+      .slave_rd(button_rd),
+      .slave_raddr(button_raddr),
+      .slave_rdata(button_rdata)
+  );
+
   
 //   // (5) Buzzer Read/Write
 //   wire [31:0] buzzer_rdata_mux_in;
@@ -412,7 +454,7 @@ module top (
     if (~rstn) 
       slave_sel <= 'b0;
     else
-      slave_sel <= {iram_rd, dram_rd, uart_rd,seg_rd,sec_clk_rd,3'b0};
+      slave_sel <= {iram_rd, dram_rd, uart_rd,seg_rd,sec_clk_rd,button_rd,2'b0};
   end
 
   always @*
@@ -423,6 +465,7 @@ module top (
       8'b00100000:  bus_rdata_mux = uart_rdata_mux_in;
       8'b00010000:  bus_rdata_mux = seg_rdata_mux_in ;
       8'b00001000:  bus_rdata_mux = sec_clk_rdata_mux_in;
+      8'b00000100:  bus_rdata_mux = button_rdata_mux_in;
       default: bus_rdata_mux = 'h0;
     endcase
   end

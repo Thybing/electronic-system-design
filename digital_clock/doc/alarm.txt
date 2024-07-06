@@ -16,4 +16,4 @@
 
     reg:
         alarm_time      触发时间
-        triggle         触发信号
+        status          状态 {30'b0,triggle,enable}

@@ -4,6 +4,7 @@
 #include "../include/xprintf.h"
 #include "../include/seg_show.h"
 #include "../include/sec_clock.h"
+#include "../include/button.h"
 
 
 int main()
@@ -19,23 +20,14 @@ int main()
     set_scan_seg_state(3,SEG_STATUS_NUM | SEG_STATUS_DOT | SEG_STATUS_SP_CHAR);
     set_static_seg(0x8f);
 
-    set_sec_clock_init_time(0x000000ff);
-
-    int cnt = 0xfff;
-    while(1){
-        xprintf("cur_tim:%u\n",get_sec_clock_cur_time());
-        --cnt;
-        if(cnt == 0) break;
-    }
-
-    xprintf("break\n");
-
-    set_sec_clock_init_time(86390);
-    sec_clock_clr();
+    set_sec_clock_init_time(0x00000000);
 
     while (1){
-        xprintf("cur_tim:%u\n",get_sec_clock_cur_time());
-        xprintf("run_tim:%u\n",get_sec_clock_run_time());
+        refresh_button_level();
+        uint8_t detection = detect_falling();
+        if(detection != 0){
+            xprintf("falling:%x\n",detection);
+        }
     }
     
 }
