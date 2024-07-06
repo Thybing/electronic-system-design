@@ -1,7 +1,7 @@
 #include "../include/ring.h"
 #include "../include/xprintf.h"
 
-#define MUSIC_SCORE_CAPACITY 128
+#define MUSIC_SCORE_CAPACITY 256
 
 #include "music_score.txt"
 
