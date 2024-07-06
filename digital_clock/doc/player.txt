@@ -1,0 +1,21 @@
+########################################
+铃声播放模块
+    功能:当使能信号触发时,自动播放一段音频,然后自动复位. 音乐设置
+
+    port:
+        clk
+        rst_n
+
+        wr
+        waddr
+        wdata
+
+        //pin_out
+        buzzer_pin
+
+    reg:
+        triggle
+        clr
+        music_buffer
+
+        

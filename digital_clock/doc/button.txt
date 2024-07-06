@@ -1,0 +1,17 @@
+#######################################
+按键模块:
+    功能:使用抽样给出稳定的按键电平
+    
+    port:
+        clk,
+        rst_n,
+
+        rd
+        raddr
+        rdata
+
+        //pin_in
+        button_pin
+
+    reg:
+        button_level
