@@ -9,10 +9,6 @@
 
 #define BUTTON_REG(addr)    (*((volatile uint32_t *)(addr+BUTTON_ADDRBASE)))
 
-extern uint8_t pre_button_level;
-extern uint8_t cur_button_level;
-
-void refresh_button_level();
 uint8_t detect_falling();
 
 #endif //__BUTTON_H_

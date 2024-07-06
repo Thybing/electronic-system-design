@@ -2,31 +2,25 @@
 
 #include "../include/uart.h"
 #include "../include/xprintf.h"
-#include "../include/seg_show.h"
-#include "../include/sec_clock.h"
-#include "../include/button.h"
+#include "../include/process_func.h"
 
 
 int main()
 {
-    uart_init();
-    xprintf("Press Key:\n");
 
-    for(int i = 0;i < 4;++i){
-        set_scan_seg_state(i,SEG_STATUS_NUM);
-        set_scan_seg_num(i,i);
-    }
-    set_scan_seg_state(2,SEG_STATUS_NUM | SEG_STATUS_DOT);
-    set_scan_seg_state(3,SEG_STATUS_NUM | SEG_STATUS_DOT | SEG_STATUS_SP_CHAR);
-    set_static_seg(0x8f);
-
-    set_sec_clock_init_time(0x00000000);
-
-    while (1){
-        refresh_button_level();
-        uint8_t detection = detect_falling();
-        if(detection != 0){
-            xprintf("falling:%x\n",detection);
+    digital_clock_init();
+    while (true){
+        refresh_time();
+        check_alarm();
+        if(g_main_status == SHOW_TIME){
+            seg_show_cur_time();
+            button_action(SHOW_TIME);
+        }else if(g_main_status == SET_TIME){
+            seg_show_tar_time();
+            button_action(SET_TIME);
+        }else if(g_main_status == SET_ALARM){
+            seg_show_alarm_time();
+            button_action(SET_ALARM);
         }
     }
     

@@ -9,5 +9,6 @@ void refresh_button_level(){
 }
 
 uint8_t detect_falling(){
+    refresh_button_level();
     return (pre_button_level ^ cur_button_level) & pre_button_level;
 }

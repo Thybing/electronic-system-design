@@ -10,10 +10,10 @@
 #include "../include/sec_clock.h"
 #include "../include/button.h"
 
-enum main_status{
+enum Main_status{
     SHOW_TIME = 0,
-    SHOW_SET_TIME,
-    SHOW_ALARM_TIME
+    SET_TIME,
+    SET_ALARM
 };
 
 struct time
@@ -23,10 +23,19 @@ struct time
     uint8_t sec;
 };
 
+extern enum Main_status g_main_status;
+
 void digital_clock_init();
+
+void refresh_time();
+bool check_alarm();
+
+void seg_show_cur_time();
+void seg_show_tar_time();
+void seg_show_alarm_time();
+
+void button_action(enum Main_status main_status);
+
 struct time timestamp_to_time(uint32_t timestamp);
-void seg_show_cur_time(uint32_t timestamp);
-void seg_show_tar_time(uint32_t timestamp);
-void seg_show_alarm_time(uint32_t timestamp);
 
 #endif //_PROCESS_FUNC_H_

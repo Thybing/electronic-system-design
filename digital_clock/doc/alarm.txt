@@ -1,19 +1,23 @@
 ######################################
-闹钟模块:
-    功能:可设定时间,与时间模块进行比对,如果相同,触发寄存器置高
 
-    port:
-        clk
-        rst_n
+在c程序中实现
 
-        wr
-        waddr
-        wdata
+//废弃方案
+#闹钟模块:
+#    功能:可设定时间,与时间模块进行比对,如果相同,触发寄存器置高
 
-        rd
-        raddr
-        rdata
+#    port:
+#        clk
+#        rst_n
 
-    reg:
-        alarm_time      触发时间
-        status          状态 {30'b0,triggle,enable}
+#        wr
+#        waddr
+#        wdata
+
+#        rd
+#        raddr
+#        rdata
+
+#    reg:
+#        alarm_time      触发时间
+#        status          状态 {30'b0,triggle,enable}

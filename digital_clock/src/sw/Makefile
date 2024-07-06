@@ -7,7 +7,7 @@ SRC_DIR = src
 BUILD_DIR = build
 VPATH = $(SRC_DIR)
 
-TARGET = button_test
+TARGET = digital_clock_test
 
 C_SRCS := \
 	main.c \
@@ -16,7 +16,8 @@ C_SRCS := \
 	trap_handler.c \
 	seg_show.c \
 	sec_clock.c \
-	button.c
+	button.c \
+	process_func.c
 
 include Makefile.common
 

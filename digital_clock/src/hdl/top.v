@@ -110,7 +110,7 @@ module top (
   ///////////////  Risc-v Instr MEM  ///////////////
   ram2port #(
       .ADDRESS_WIDTH(ADDRWIDTH_IRAM), 
-      .FILE("button_test.txt") 
+      .FILE("digital_clock_test.txt") 
   ) u_iram (
       .clk(clk),
       .addra(instr_raddr),
