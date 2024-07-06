@@ -2,7 +2,7 @@
 !/first_design/design1/**/
 /second_design/design2/**
 !/second_design/design2/**/
-/课件/
+
 /.vscode/
 *.zip
 /**/build/
