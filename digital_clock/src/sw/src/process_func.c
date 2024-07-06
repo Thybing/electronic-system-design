@@ -34,8 +34,13 @@ void refresh_time(){
     cur_timestamp = get_sec_clock_cur_time();
 }
 
-bool check_alarm(){
-    return false;
+void check_alarm(){
+    if(alarm_enable && (alarm_timestamp == cur_timestamp)){
+        alarm_triggle = true;
+    }
+    if(alarm_triggle){
+        xprintf("\n\n########ding~ding~ding~#########\n\n");
+    }
 }
 
 void seg_show_cur_time(){
@@ -96,6 +101,7 @@ void button_action(enum Main_status main_status){
         }
         if(button_triggle & (0x01 << 3)){
             alarm_enable = false;
+            alarm_triggle = false;
             xprintf("*************alart disable************\n");
         }
     }else if(main_status == SET_TIME){

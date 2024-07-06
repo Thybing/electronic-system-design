@@ -28,7 +28,7 @@ extern enum Main_status g_main_status;
 void digital_clock_init();
 
 void refresh_time();
-bool check_alarm();
+void check_alarm();
 
 void seg_show_cur_time();
 void seg_show_tar_time();
