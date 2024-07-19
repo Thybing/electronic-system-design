@@ -12,4 +12,6 @@
 
 第三次实验:编写播放器。项目结构及项目构建方法详见third_project内readme.md
 
+大作业：数字钟。项目结构及项目构建方法详见third_project内readme.md
+
 附课件
